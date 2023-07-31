@@ -1,6 +1,18 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from flask import Flask,request,render_template,jsonify,redirect,url_for
+
+obj=Flask(__name__)
+
+@obj.route('/')
+def home():
+    return "<h2>Add '/table' to url to get table data</h2>"
+
+@obj.route('/table',methods=['GET','POST'])
+def table():
+   if request.method=='GET':
+        return render_template('table.html')
 
 #url="https://www.flipkart.com/"
 Name_Of_Person=[]
@@ -76,7 +88,11 @@ df=pd.DataFrame({"Person Name":Name_Of_Person,"Title":Comment_Title,"Rating":Rat
 #print(len(Rating))
 #print(len(Description))
 #print(df)
-df.to_csv(r"C:\Users\hp\Flipkart_review_scrapping.csv")
+#df.to_csv(r"C:\Users\hp\Flipkart_review_scrapping.csv")
+#df1=df.to_html(r"C:\Users\hp\Task_Flip_Scrapp\templates\table.html")
+
+if __name__=='__main__':
+    obj.run()
 
 
 
